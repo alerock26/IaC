@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description:
+  This stack will create some random resources,
+  just testing AWS CloudFormation by alerock26
+
+Parameters:
+  InstanceTypeAlerock26:
+    Description: "Define the type of EC2 to use"
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.small
+      - t2.xlarge
+
+  AmiParam:
+    Description: "Here we define the AMI to use"
+    Type: String
+    Default: 'ami-071226ecf16aa7d96'
+
+Resources:
+  SecGroupAlerock26:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: SSH by alerock26
+      GroupName: Sec Group by alerock26
+      VpcId: vpc-014b2ece9a29285d1
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: 0
+          ToPort: 0
+          CidrIp: 0.0.0.0/0
+  Server1:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: !Ref AmiParam
+      InstanceType: !Ref InstanceTypeAlerock26
+      KeyName: 'alerock26-key'
+      SecurityGroupIds: 
+        - !Ref SecGroupAlerock26
+      Tags:
+        - Key: Name
+          Value: Server1
+        - Key: Owner
+          Value: alerock26
+
+Outputs:
+  EC2ID:
+    Description: "Here we return the ID of the created EC2 Instance"
+    Value: !Ref Server1

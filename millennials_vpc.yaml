@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description:
+  VPC and related objects, created
+  by alerock26 as a test.
+
+Resources:
+  MillennialsVPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: 192.168.0.0./16
+      tags:
+        -Key: Name
+        -Value: MillennialsVPC
