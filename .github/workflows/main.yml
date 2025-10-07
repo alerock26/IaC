@@ -1,10 +1,10 @@
-name: Hello World
+name: alerock26_first_flow
 
 on:
   workflow_dispatch:
 
 jobs:
-  say-hello-inline-bash:
+  alerock26_action:
     runs-on: ubuntu-24.04
     steps:
-      - run: echo "Hello from an inline bash script in a GitHub Action Workflow!"
+      - run: echo "Alerock26 workflow is in tha house!"
